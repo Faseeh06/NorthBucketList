@@ -7,5 +7,5 @@ export const tripsPageHero = {
   description:
     "Bookable route frames, a custom builder, and sample PKR packages—Hunza, Skardu, Swat, and the high roads in between.",
   image: { src: "/images/passu.jpg", alt: "Mountain passes and the Karakoram — Northern Pakistan" },
-  cta: { label: "See sample pricing", href: "/trips#pricing" as const },
+  cta: { label: "Request a quote", href: "/contact" as const },
 } as const;

@@ -39,7 +39,7 @@ export function PageHero({ eyebrow, titleLines, description, image, cta, variant
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none lg:hidden" aria-hidden />
             </div>
             <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-12 xl:p-14 order-1 lg:order-2 bg-background">
-              <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground mb-4">
+              <p className="mb-4 text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground sm:text-xs">
                 {eyebrow}
               </p>
               <h1
@@ -98,7 +98,7 @@ export function PageHero({ eyebrow, titleLines, description, image, cta, variant
       </div>
 
       <div className="relative z-10 w-full max-w-[min(100%,1760px)] mx-auto px-4 sm:px-5 lg:px-8 pb-10 sm:pb-12 md:pb-16 pt-32 md:pt-36">
-        <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.25em] text-white/60 mb-4">
+        <p className="mb-4 text-[10px] font-mono uppercase tracking-[0.18em] text-white/70 sm:text-xs">
           {eyebrow}
         </p>
         <h1

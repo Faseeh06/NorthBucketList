@@ -1,26 +1,47 @@
 import Image from "next/image";
+import { BRAND_ACCENT_HEX } from "@/lib/constants/brand";
 
 /**
- * Cinematic wordmark strip before the global footer.
+ * Inset wordmark banner before the global footer (contact page) — full-bleed image card,
+ * not edge-to-edge; extra vertical size and page padding.
  */
 export function ContactWordmarkStrip() {
   return (
-    <section className="relative w-full h-[min(50vh,420px)] min-h-[280px]">
-      <div className="absolute inset-0">
-        <Image
-          src="/images/isolated.jpg"
-          alt="Mountain road and high landscape in Northern Pakistan"
-          fill
-          className="object-cover object-center"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-black/40" />
-      </div>
-      <div className="relative z-10 h-full flex items-center justify-center px-4">
-        <p className="font-sans text-4xl sm:text-5xl md:text-6xl text-white text-center tracking-[-0.04em] [text-shadow:0_2px_24px_rgba(0,0,0,0.4)]">
-          NorthBucket List
-          <span className="text-primary">*</span>
-        </p>
+    <section className="w-full bg-background py-8 sm:py-10 md:py-12 lg:py-14">
+      <div className="mx-auto w-full max-w-[min(100%,1520px)] px-3 sm:px-4 md:px-5 lg:px-6">
+        <div
+          className="relative flex min-h-[min(50vh,440px)] w-full items-center justify-center overflow-hidden rounded-2xl border border-foreground/10 shadow-[0_20px_50px_-24px_rgba(0,0,0,0.28)] sm:min-h-[min(52vh,500px)] sm:rounded-3xl md:min-h-[min(55vh,540px)]"
+        >
+          <Image
+            src="/images/hunza.webp"
+            alt="Hunza high valleys and peaks"
+            fill
+            className="object-cover object-center"
+            sizes="(min-width: 1520px) 1480px, (min-width: 1024px) 90vw, 94vw"
+            priority={false}
+          />
+          <div
+            className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/35 to-black/55"
+            aria-hidden
+          />
+          <p
+            className="relative z-10 max-w-5xl px-5 text-center font-redob uppercase leading-[0.88] tracking-[-0.02em] text-white [text-shadow:0_2px_40px_rgba(0,0,0,0.45),0_1px_3px_rgba(0,0,0,0.5)] sm:px-8 md:px-10"
+            style={{ fontSize: "clamp(2.25rem,7vw,5.25rem)" }}
+          >
+            <span className="block sm:inline">North</span>{" "}
+            <span className="block sm:inline">Bucket</span>{" "}
+            <span className="inline-block whitespace-nowrap">
+              List
+              <span
+                className="ml-0.5 align-super text-[0.4em] sm:ml-1"
+                style={{ color: BRAND_ACCENT_HEX }}
+                aria-hidden
+              >
+                *
+              </span>
+            </span>
+          </p>
+        </div>
       </div>
     </section>
   );

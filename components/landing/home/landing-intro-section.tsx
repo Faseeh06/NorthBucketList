@@ -28,7 +28,7 @@ export function LandingIntroSection() {
         aria-hidden
       />
 
-      <SectionContainer className="py-12 md:py-16">
+      <SectionContainer className="py-14 md:py-20">
         <div className="mb-6 flex items-center gap-2">
           <BrandSquare />
           <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground sm:text-sm">
@@ -36,7 +36,7 @@ export function LandingIntroSection() {
           </p>
         </div>
 
-        <h2 className="ml-auto max-w-4xl text-right font-sans text-[clamp(1.35rem,3.8vw,2.5rem)] leading-[1.12] tracking-[-0.04em] text-foreground">
+        <h2 className="ml-auto max-w-4xl text-right font-sans text-[clamp(1.4rem,3.9vw,2.6rem)] leading-[1.12] tracking-[-0.04em] text-foreground">
           {headline}
           <span className="text-primary" aria-hidden>
             *

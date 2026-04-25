@@ -9,10 +9,13 @@ export const site = {
 
 export const routes = {
   home: "/",
+  about: "/about",
   contact: "/contact",
   discover: "/discover",
-  feedbacks: "/feedbacks",
+  /** @deprecated use `about` — `/feedbacks` redirects to `/about` */
+  feedbacks: "/about",
   trips: "/trips",
+  gallery: "/gallery",
 } as const;
 
 export type AppRoute = (typeof routes)[keyof typeof routes];

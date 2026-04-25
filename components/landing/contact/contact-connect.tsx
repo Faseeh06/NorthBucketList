@@ -1,49 +1,51 @@
 import { MapPin, MessageCircle } from "lucide-react";
 import Link from "next/link";
+import { BrandSquare } from "@/components/landing/shared/brand-square";
+import { SectionContainer } from "@/components/landing/shared/section-container";
 import { ContactForm } from "./contact-form";
 
 const socials = [
   { label: "Email the desk", href: "mailto:hello@northbucketlist.com", abbr: "@" },
   { label: "Discover routes", href: "/discover", abbr: "◆" },
-  { label: "Traveler stories", href: "/feedbacks", abbr: "☆" },
+  { label: "About us", href: "/about", abbr: "☆" },
 ];
 
 export function ContactConnectSection() {
   return (
     <section
       id="connect"
-      className="bg-background border-t border-foreground/10 py-12 md:py-16 scroll-mt-24"
+      className="scroll-mt-24 border-t border-foreground/10 bg-background py-16 font-sans lg:py-20"
     >
-      <div className="w-full max-w-[min(100%,1760px)] mx-auto px-4 sm:px-5 lg:px-8">
-        <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground mb-3">
-          <span className="text-foreground" aria-hidden>
-            ■
-          </span>
-          <span>Fill the form out</span>
+      <SectionContainer>
+        <div className="mb-6 flex items-center gap-2">
+          <BrandSquare />
+          <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground sm:text-sm">
+            Fill the form out
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 lg:items-start">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start lg:gap-16">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-sm border border-foreground/10 bg-card px-3 py-1.5 mb-6">
+            <div className="mb-6 inline-flex items-center gap-2 rounded-sm border border-foreground/10 bg-card px-3 py-1.5">
               <MessageCircle className="h-4 w-4 text-foreground/70" strokeWidth={1.5} />
-              <span className="font-sans text-xs text-foreground/90">Contact now</span>
+              <span className="font-sans text-xs text-foreground/90 sm:text-sm">Contact now</span>
             </div>
 
-            <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl text-foreground tracking-[-0.04em] leading-[0.95]">
+            <h2 className="font-sans text-5xl leading-[0.9] tracking-[-0.04em] text-foreground sm:text-6xl md:text-7xl">
               Let&apos;s connect
             </h2>
-            <p className="mt-4 text-muted-foreground text-sm sm:text-base leading-relaxed max-w-md">
+            <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground sm:mt-5 sm:text-lg">
               Whether you want a KKH run, a Hunza week, or a first-time taste of the high valleys, tell
               us your window—we&apos;ll help you shape a realistic, weather-aware plan.
             </p>
 
             <div className="mt-8 space-y-1">
-              <h3 className="font-sans text-xs uppercase tracking-widest text-muted-foreground">
+              <h3 className="text-xs font-mono uppercase tracking-[0.12em] text-muted-foreground sm:text-sm sm:tracking-[0.16em]">
                 Base & field
               </h3>
               <div className="flex gap-3">
-                <MapPin className="h-5 w-5 text-foreground/60 shrink-0 mt-0.5" strokeWidth={1.5} />
-                <p className="text-sm text-foreground/90 leading-relaxed">
+                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-foreground/60" strokeWidth={1.5} />
+                <p className="text-sm leading-relaxed text-foreground/90 sm:text-base">
                   Field teams: Gilgit-Baltistan & Khyber Pakhtunkhwa
                   <br />
                   <span className="text-muted-foreground">Planning desk: Islamabad</span>
@@ -52,7 +54,7 @@ export function ContactConnectSection() {
             </div>
 
             <div className="mt-8">
-              <p className="font-sans text-xs uppercase tracking-widest text-muted-foreground mb-3">
+              <p className="mb-3 text-xs font-mono uppercase tracking-[0.12em] text-muted-foreground sm:text-sm sm:tracking-[0.16em]">
                 Follow the trail
               </p>
               <ul className="flex flex-wrap gap-2">
@@ -73,7 +75,7 @@ export function ContactConnectSection() {
 
           <ContactForm />
         </div>
-      </div>
+      </SectionContainer>
     </section>
   );
 }

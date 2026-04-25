@@ -30,7 +30,7 @@ export function ContactForm() {
       className="rounded-sm border-2 border-foreground/10 bg-muted/20 p-5 sm:p-6 md:p-8 space-y-4 shadow-[3px_3px_0_0_rgba(0,0,0,0.04)]"
     >
       <div className="space-y-2">
-        <label htmlFor="name" className="font-sans text-xs text-foreground/80">
+        <label htmlFor="name" className="font-sans text-xs sm:text-sm text-foreground/90">
           Name <span className="text-foreground">*</span>
         </label>
         <Input
@@ -43,7 +43,7 @@ export function ContactForm() {
         />
       </div>
       <div className="space-y-2">
-        <label htmlFor="email" className="font-sans text-xs text-foreground/80">
+        <label htmlFor="email" className="font-sans text-xs sm:text-sm text-foreground/90">
           Email <span className="text-foreground">*</span>
         </label>
         <Input
@@ -57,7 +57,7 @@ export function ContactForm() {
         />
       </div>
       <div className="space-y-2">
-        <label htmlFor="message" className="font-sans text-xs text-foreground/80">
+        <label htmlFor="message" className="font-sans text-xs sm:text-sm text-foreground/90">
           Message <span className="text-foreground">*</span>
         </label>
         <Textarea
@@ -73,7 +73,7 @@ export function ContactForm() {
         type="submit"
         size="lg"
         disabled={sending}
-        className="w-full h-12 rounded-sm bg-foreground text-background hover:bg-foreground/90 text-base font-sans"
+        className="h-12 w-full rounded-sm bg-foreground font-sans text-base text-background hover:bg-foreground/90"
       >
         {sending ? "Opening email…" : "Submit now"}
       </Button>

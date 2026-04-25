@@ -8,7 +8,7 @@ import { ChevronDown } from "lucide-react";
  */
 export function ContactHero() {
   return (
-    <section className="relative flex min-h-[min(88vh,820px)] w-full flex-col">
+    <section className="relative flex min-h-[min(88vh,820px)] w-full flex-col font-sans">
       <div className="absolute inset-0">
         <Image
           src="/images/passu.jpg"
@@ -35,25 +35,25 @@ export function ContactHero() {
       <div className="relative z-10 mx-auto mt-28 flex w-full max-w-[min(100%,1760px)] flex-1 flex-col justify-end px-4 pb-10 sm:px-5 sm:mt-32 sm:pb-12 md:pb-16 lg:px-8">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
           <div>
-            <p className="mb-3 font-mono text-[10px] uppercase tracking-[0.2em] text-white/60 sm:text-xs">
+            <p className="mb-4 text-[10px] font-mono uppercase tracking-[0.18em] text-white/65 sm:mb-5 sm:text-xs">
               NorthBucket List
             </p>
             <h1
-              className="max-w-[14ch] font-sans text-[clamp(2.5rem,8vw,5rem)] font-semibold leading-[0.95] tracking-[-0.04em] text-white [text-shadow:0_2px_32px_rgba(0,0,0,0.45)]"
+              className="max-w-[18ch] font-redob uppercase leading-[0.88] tracking-[-0.02em] text-white [text-shadow:0_2px_40px_rgba(0,0,0,0.4),0_1px_3px_rgba(0,0,0,0.45)]"
+              style={{ fontSize: "clamp(2.5rem,8vw,5.75rem)" }}
             >
-              Contact
-              <br />
-              <span className="font-normal text-white/80">us</span>
+              <span className="block">Contact</span>
+              <span className="block text-white/85">us</span>
             </h1>
           </div>
-          <div className="flex max-w-md flex-col gap-5 sm:flex-row sm:items-end lg:max-w-sm lg:flex-col lg:items-end">
-            <p className="text-left text-base font-sans leading-relaxed text-white/90 sm:text-lg lg:text-right">
+          <div className="flex max-w-md flex-col gap-5 sm:flex-row sm:items-end lg:max-w-lg lg:flex-col lg:items-end">
+            <p className="text-left font-sans text-base leading-relaxed text-white/90 sm:text-lg md:text-xl lg:text-right">
               Share your season, group size, and the valleys you have in mind—we reply within one
               business day.
             </p>
             <Link
               href="#connect"
-              className="inline-flex items-center gap-2 self-start font-mono text-xs uppercase tracking-[0.2em] text-white/80 transition-colors hover:text-white sm:self-end"
+              className="inline-flex items-center gap-2 self-start font-mono text-xs uppercase tracking-[0.18em] text-white/80 transition-colors hover:text-white sm:self-end"
             >
               <span>Scroll to form</span>
               <ChevronDown className="h-4 w-4 animate-bounce" strokeWidth={2} />

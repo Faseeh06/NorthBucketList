@@ -136,7 +136,7 @@ export function FeaturedTripsSection() {
               style={{ transitionDelay: `${index * 80 + 200}ms` }}
             >
               <Link
-                href={listHref}
+                href={trip.slug ? `/trips/${trip.slug}` : listHref}
                 className="group block rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
               >
                 <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 group-hover:border-foreground/15 group-hover:shadow-md">

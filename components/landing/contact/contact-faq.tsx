@@ -2,6 +2,8 @@
 
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { Plus } from "lucide-react";
+import { BrandSquare } from "@/components/landing/shared/brand-square";
+import { SectionContainer } from "@/components/landing/shared/section-container";
 import { cn } from "@/lib/utils";
 
 const faq = [
@@ -29,26 +31,27 @@ const faq = [
 
 export function ContactFaq() {
   return (
-    <section className="bg-muted/25 border-t border-foreground/10 py-12 md:py-16">
-      <div className="w-full max-w-[min(100%,960px)] mx-auto px-4 sm:px-5 lg:px-8">
-        <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground mb-8">
-          <span className="text-foreground" aria-hidden>
-            ■
-          </span>
-          <span>FAQ</span>
-        </div>
+    <section className="border-t border-foreground/10 bg-muted/25 py-16 font-sans lg:py-20">
+      <SectionContainer>
+        <div className="mx-auto max-w-3xl">
+          <div className="mb-8 flex items-center gap-2">
+            <BrandSquare />
+            <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground sm:text-sm">
+              FAQ
+            </p>
+          </div>
 
-        <h2 className="font-sans text-3xl sm:text-4xl text-foreground tracking-[-0.04em] mb-2">
-          Common questions
-        </h2>
-        <p className="font-sans text-sm text-muted-foreground mb-10 max-w-lg">
-          Straight answers for planning trips in the north.
-        </p>
+          <h2 className="mb-2 font-sans text-4xl leading-[0.9] tracking-[-0.04em] text-foreground sm:text-5xl md:text-6xl">
+            Common questions
+          </h2>
+          <p className="mb-10 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
+            Straight answers for planning trips in the north.
+          </p>
 
-        <AccordionPrimitive.Root type="single" collapsible className="w-full">
-          {faq.map((item, i) => {
-            const n = String(i + 1).padStart(2, "0");
-            return (
+          <AccordionPrimitive.Root type="single" collapsible className="w-full">
+            {faq.map((item, i) => {
+              const n = String(i + 1).padStart(2, "0");
+              return (
               <AccordionPrimitive.Item
                 key={item.q}
                 value={`item-${i}`}
@@ -61,16 +64,16 @@ export function ContactFaq() {
                       "focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background",
                     )}
                   >
-                    <span className="flex gap-3 sm:gap-5 min-w-0">
-                      <span className="font-mono text-sm text-muted-foreground tabular-nums pt-0.5 shrink-0 w-7">
+                    <span className="flex min-w-0 gap-3 sm:gap-5">
+                      <span className="w-7 shrink-0 pt-0.5 font-mono text-sm tabular-nums text-muted-foreground">
                         {n}
                       </span>
-                      <span className="font-sans text-base sm:text-lg text-foreground leading-snug pr-2">
+                      <span className="pr-2 font-sans text-base leading-snug text-foreground sm:text-lg">
                         {item.q}
                       </span>
                     </span>
                     <span
-                      className="shrink-0 h-8 w-8 flex items-center justify-center border border-foreground/15 bg-card rounded-sm group-data-[state=open]:bg-foreground/5"
+                      className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm border border-foreground/15 bg-card group-data-[state=open]:bg-foreground/5"
                       aria-hidden
                     >
                       <Plus className="h-4 w-4 text-foreground transition-transform duration-200 group-data-[state=open]:rotate-45" />
@@ -78,17 +81,18 @@ export function ContactFaq() {
                   </AccordionPrimitive.Trigger>
                 </AccordionPrimitive.Header>
                 <AccordionPrimitive.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-                  <div className="pl-0 sm:pl-12 pr-10 pb-5">
-                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                  <div className="pb-5 pl-0 pr-10 sm:pl-12">
+                    <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
                       {item.a}
                     </p>
                   </div>
                 </AccordionPrimitive.Content>
               </AccordionPrimitive.Item>
-            );
-          })}
-        </AccordionPrimitive.Root>
-      </div>
+              );
+            })}
+          </AccordionPrimitive.Root>
+        </div>
+      </SectionContainer>
     </section>
   );
 }

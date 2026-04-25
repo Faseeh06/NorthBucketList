@@ -6,6 +6,8 @@ export type FeaturedTripEntry = {
   tags: [string, string];
   image: string;
   objectPosition?: string;
+  /** Links home card to `/trips/{slug}` when set */
+  slug?: string;
 };
 
 /**
@@ -36,6 +38,7 @@ export const featuredTripsContent = {
       tags: ["KKH", "Peaks"],
       image: "/images/passu.jpg",
       objectPosition: "50% 42%",
+      slug: "passu-kkh-karakoram",
     },
     {
       title: "Hunza high valleys",
@@ -43,6 +46,7 @@ export const featuredTripsContent = {
       tags: ["Valleys", "Heritage"],
       image: "/images/hunza.webp",
       objectPosition: "50% 45%",
+      slug: "hunza-heritage-valleys",
     },
     {
       title: "Skardu & Baltistan",
@@ -50,6 +54,7 @@ export const featuredTripsContent = {
       tags: ["4×4 days", "Indus side"],
       image: "/images/skardu.webp",
       objectPosition: "50% 48%",
+      slug: "skardu-baltistan-gateway",
     },
     {
       title: "Kumrat & forest roads",
@@ -57,6 +62,7 @@ export const featuredTripsContent = {
       tags: ["KP", "Utror side"],
       image: "/images/kumrat.jpg",
       objectPosition: "50% 50%",
+      slug: "kumrat-forest-roads",
     },
   ] as const satisfies readonly FeaturedTripEntry[],
 };

@@ -58,37 +58,42 @@ const experiences: {
   price: string;
   reviews: number;
   image: string;
+  href: string;
 }[] = [
   {
     title: "Hunza full-day: Karimabad, Baltit Fort, sunset view",
     price: "from $85 per person",
     reviews: 128,
     image: "/images/hunza.webp",
+    href: "/trips/hunza-heritage-valleys",
   },
   {
     title: "Skardu gateway: Shigar, cold desert & Shangrila",
     price: "from $110 per person",
     reviews: 67,
     image: "/images/skardu.webp",
+    href: "/trips/skardu-baltistan-gateway",
   },
   {
     title: "Kumrat: pines, streams & Kumrat Valley days",
     price: "from $78 per person",
     reviews: 88,
     image: "/images/kumrat.jpg",
+    href: "/trips/kumrat-forest-roads",
   },
   {
     title: "Kalam: Swat highlands, Ushu forest & clear rivers",
     price: "from $82 per person",
     reviews: 102,
     image: "/images/kalam.jpg",
+    href: "/trips/kalam-swat-rivers",
   },
 ];
 
 function DiscoverExperienceCard({ item }: { item: (typeof experiences)[0] }) {
   return (
     <article className="flex h-full min-w-0 flex-col overflow-hidden rounded-lg border-2 border-foreground/10 bg-card shadow-[2px_2px_0_0_rgba(0,0,0,0.05)]">
-      <Link href="/trips" className="block flex flex-col flex-1 min-h-0 text-left group">
+      <Link href={item.href} className="block flex h-full min-w-0 flex-1 flex-col text-left group">
         <div className="relative aspect-[4/5] w-full">
           <Image
             src={item.image}
@@ -179,7 +184,7 @@ export function DiscoverArticleTeaser() {
               </p>
             </div>
             <Link
-              href="/feedbacks"
+              href="/about"
               className="shrink-0 inline-flex items-center justify-center self-start sm:self-center min-h-10 px-5 text-sm font-semibold border-2 border-foreground bg-card text-foreground hover:bg-foreground hover:text-background transition-colors rounded-full"
             >
               Read now

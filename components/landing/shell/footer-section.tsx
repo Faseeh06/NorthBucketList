@@ -9,10 +9,11 @@ import { BRAND_ACCENT_HEX } from "@/lib/constants/brand";
 
 const navLinks: { n: string; name: string; href: string }[] = [
   { n: "01", name: "Discover", href: "/discover" },
-  { n: "02", name: "Feedbacks", href: "/feedbacks" },
+  { n: "02", name: "About", href: "/about" },
   { n: "03", name: "Trips", href: "/trips" },
-  { n: "04", name: "Contact", href: "/contact" },
-  { n: "05", name: "Home", href: "/" },
+  { n: "04", name: "Gallery", href: "/gallery" },
+  { n: "05", name: "Contact", href: "/contact" },
+  { n: "06", name: "Home", href: "/" },
 ];
 
 export function FooterSection() {

@@ -1,21 +1,20 @@
 /**
- * Home — “1.2 About us” (who we are, youth & growth, @NorthBucketList shots).
+ * Home — About North Bucket List (who we are, how we work, @NorthBucketList shots).
  */
 export const aboutUsContent = {
   sectionId: "about" as const,
-  label: "1.2 About us",
-  title: { line1: "About", line2: "us." },
+  label: "About North Bucket List",
+  title: { line1: "About", line2: "North Bucket List." },
   paragraphs: [
-    "North Bucket List is more than just a travel company. We create transformative experiences for young people by combining travel, adventure, and personal growth.",
-    "We are rooted in Gilgit-Baltistan and the high north, but our focus is the people in the group: how you show up when the pass is long, how the team carries each other when plans change, and what you take home that is not only photos.",
-    "On the road, that means honest season and weather windows, vetted drivers and hosts, and itineraries with room to breathe—so the mountain days feel earned, not rushed from one gate to the next.",
+    "At North Bucket List, we plan trips across the north that are built around you—what you want, how you want to travel, and the kind of experience you're looking for. It's not just about putting together an itinerary. It's about creating moments you'll actually remember, the kind that turn strangers into friends and trips into something you carry with you long after it ends.",
+    "From where you stay to how you get there, everything is handled properly so you don't have to stress about the details. You can just show up, take it all in, and enjoy the journey the way it's meant to be.",
+    "How we work… We prioritize safe and well-planned travel with trusted drivers, local hosts, and carefully chosen seasons. Our itineraries are flexible, giving you space to truly experience the mountains without feeling rushed.",
   ] as const,
-  onEveryTrip:
-    "From hiking expeditions to team-based challenges, every trip is designed to help you grow, connect, and discover your potential.",
+  onEveryTrip: "At North Bucket List, every trip is designed to be real, memorable, and transformative.",
   card: {
-    kicker: "On every trip",
+    kicker: "Our promise",
   },
-  pillars: ["Grow", "Connect", "Discover"] as const,
+  pillars: ["Real", "Memorable", "Transformative"] as const,
   /** Shots from `public/images/NorthBucketList_insta/` (Instagram). */
   instaGallery: [
     {

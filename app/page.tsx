@@ -9,7 +9,7 @@ import { TestimonialsSection } from "@/components/landing/home/testimonials-sect
 export const metadata: Metadata = {
   title: "Trips in Northern Pakistan",
   description:
-    "Curated journeys through Hunza, Skardu, Naran, and the Karakoram. Local guides, trusted transport, and unforgettable mountain experiences.",
+    "Journeys across the Karakoram and Hindu Kush—real roads, real stays, and flexible plans for Hunza, Skardu, and the KKH. Built around you.",
 };
 
 export default function Home() {

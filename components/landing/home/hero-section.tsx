@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 const stats = [
-  { value: "12+", label: "valleys" },
-  { value: "5000+", label: "travelers" },
+  { value: "3000+", label: "travelers" },
   { value: "10+", label: "years" },
+  { value: "15+", label: "trips" },
 ];
 
 export function HeroSection() {

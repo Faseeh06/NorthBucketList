@@ -78,7 +78,9 @@ export function FeaturedTripsSection() {
               <br />
               <span className="text-muted-foreground">
                 {title.line2}
-                <span className="text-muted-foreground/70 font-light">®</span>
+                {"showRegisteredMark" in title && title.showRegisteredMark === true ? (
+                  <span className="font-light text-muted-foreground/70">®</span>
+                ) : null}
               </span>
             </h2>
           </div>

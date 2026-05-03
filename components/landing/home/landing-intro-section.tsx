@@ -58,13 +58,15 @@ export function LandingIntroSection() {
           </Link>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-8 md:mt-12 md:grid-cols-2 md:gap-10">
+        <div className="mt-10 grid grid-cols-1 gap-8 md:mt-12 md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:gap-8">
           {columns.map((col) => (
             <div key={col.title}>
               <h3 className="font-sans text-xl tracking-[-0.04em] text-foreground sm:text-2xl">
                 {col.title}
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{col.body}</p>
+              <p className="mt-3 whitespace-pre-line text-sm leading-relaxed text-muted-foreground sm:text-base">
+                {col.body}
+              </p>
             </div>
           ))}
         </div>

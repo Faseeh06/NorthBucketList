@@ -90,7 +90,8 @@
     @apply border-border outline-ring/50;
   }
   html {
-    scroll-behavior: smooth;
+    /* Instant scroll on route changes; global smooth scroll made navigations (e.g. /trips → /trips/minimarg) visibly animate to top. */
+    scroll-behavior: auto;
     background-color: var(--background);
   }
   body {

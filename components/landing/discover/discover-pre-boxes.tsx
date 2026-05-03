@@ -65,28 +65,28 @@ const experiences: {
     price: "from $85 per person",
     reviews: 128,
     image: "/images/hunza.webp",
-    href: "/trips/hunza-heritage-valleys",
+    href: "/trips/minimarg",
   },
   {
     title: "Skardu gateway: Shigar, cold desert & Shangrila",
     price: "from $110 per person",
     reviews: 67,
     image: "/images/skardu.webp",
-    href: "/trips/skardu-baltistan-gateway",
+    href: "/trips/minimarg",
   },
   {
     title: "Kumrat: pines, streams & Kumrat Valley days",
     price: "from $78 per person",
     reviews: 88,
     image: "/images/kumrat.jpg",
-    href: "/trips/kumrat-forest-roads",
+    href: "/trips/minimarg",
   },
   {
     title: "Kalam: Swat highlands, Ushu forest & clear rivers",
     price: "from $82 per person",
     reviews: 102,
     image: "/images/kalam.jpg",
-    href: "/trips/kalam-swat-rivers",
+    href: "/trips/minimarg",
   },
 ];
 

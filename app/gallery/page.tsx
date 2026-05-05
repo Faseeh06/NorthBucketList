@@ -1,10 +1,28 @@
 import type { Metadata } from "next";
 import { SiteLayout } from "@/components/landing/shell/site-layout";
 import { InstaGallerySection } from "@/components/landing/gallery/insta-gallery-section";
+import { routes } from "@/lib/content/site";
 
 export const metadata: Metadata = {
   title: "Gallery",
-  description: "Moments from the road with North Bucket List—field photos from our community runs in the North.",
+  description:
+    "Photo stories from Hunza, Skardu, and high-road Pakistan trips—field moments, mountain routes, and real travel conditions.",
+  alternates: {
+    canonical: routes.gallery,
+  },
+  openGraph: {
+    title: "Northern Pakistan Travel Gallery | NorthBucket List",
+    description:
+      "See on-road moments from NorthBucket List departures across Hunza, Skardu, and surrounding valleys.",
+    url: routes.gallery,
+    images: [{ url: "/images/passu.jpg", alt: "Northern Pakistan road trip gallery" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Northern Pakistan Travel Gallery | NorthBucket List",
+    description: "Visual stories from Pakistan mountain trips and route days.",
+    images: ["/images/passu.jpg"],
+  },
 };
 
 export default function GalleryPage() {

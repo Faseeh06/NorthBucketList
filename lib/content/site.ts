@@ -5,6 +5,8 @@ export const site = {
   name: "NorthBucket List",
   shortName: "NorthBucket",
   email: "hello@northbucketlist.com",
+  siteUrl: "https://northbucketlist.com",
+  locale: "en_PK",
 } as const;
 
 export const routes = {

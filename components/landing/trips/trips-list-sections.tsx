@@ -76,7 +76,7 @@ export function TripsPackagesSection() {
   const deck =
     packages.length === 1 && primary
       ? primary.tagline
-      : "Bookable route frames with fixed dates—more corridors will land here as we lock seasons.";
+      : "Bookable Pakistan route departures with fixed windows, practical pacing, and clear PKR pricing guidance.";
 
   return (
     <section className="relative overflow-hidden border-b border-border/50 bg-gradient-to-b from-muted/50 via-background to-muted/25 py-16 md:py-24">

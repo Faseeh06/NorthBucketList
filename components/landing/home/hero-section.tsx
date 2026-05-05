@@ -54,7 +54,7 @@ export function HeroSection() {
           }`}
         >
           <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.2em] text-white/70 mb-6 sm:mb-8">
-            Northern Pakistan — curated trips
+            Northern Pakistan — Hunza, Skardu, KKH routes
           </p>
           <h1
             className="font-redob uppercase tracking-[-0.02em] leading-[0.88] text-white select-none [text-shadow:0_2px_40px_rgba(0,0,0,0.35),0_1px_3px_rgba(0,0,0,0.5)]"

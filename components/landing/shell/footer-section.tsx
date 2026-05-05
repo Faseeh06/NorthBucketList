@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ArrowUp } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { site } from "@/lib/content/site";
 import { BRAND_ACCENT_HEX } from "@/lib/constants/brand";
@@ -13,7 +13,6 @@ const navLinks: { n: string; name: string; href: string }[] = [
   { n: "03", name: "Trips", href: "/trips" },
   { n: "04", name: "Gallery", href: "/gallery" },
   { n: "05", name: "Contact", href: "/contact" },
-  { n: "06", name: "Home", href: "/" },
 ];
 
 export function FooterSection() {
@@ -33,10 +32,10 @@ export function FooterSection() {
               </span>
             </h3>
             <a
-              href={`mailto:${site.email}`}
-              className="font-sans text-2xl font-semibold tracking-[-0.03em] text-foreground underline decoration-foreground/20 underline-offset-[0.2em] transition-colors hover:decoration-foreground/50 sm:text-3xl md:text-4xl"
+              href="mailto:shaheerkashif33@gmail.com"
+              className="block font-sans text-2xl font-semibold tracking-[-0.03em] text-foreground underline decoration-foreground/20 underline-offset-[0.2em] transition-colors hover:decoration-foreground/50 sm:text-3xl md:text-4xl"
             >
-              {site.email}
+              shaheerkashif33@gmail.com
             </a>
             <p className="max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl">
               Route drops, season notes for Hunza & Skardu, and reply within one business day.
@@ -45,14 +44,19 @@ export function FooterSection() {
               asChild
               className="mt-1 h-14 w-fit rounded-full border border-foreground/10 bg-card pl-2 pr-8 text-foreground shadow-none transition-colors hover:bg-foreground/[0.04] sm:mt-2"
             >
-              <a href={`mailto:${site.email}`} className="inline-flex items-center gap-3">
+              <a
+                href="https://wa.me/923116982206?text=Hi%20NorthBucket%20List%2C%20I%20want%20to%20plan%20a%20trip."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3"
+              >
                 <span
                   className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-primary-foreground"
-                  style={{ backgroundColor: BRAND_ACCENT_HEX }}
+                  style={{ backgroundColor: "#25D366" }}
                 >
                   <ArrowRight className="h-4 w-4" strokeWidth={2.2} />
                 </span>
-                <span className="text-base font-medium sm:text-lg">Contact now</span>
+                <span className="text-base font-medium sm:text-lg">WhatsApp now</span>
               </a>
             </Button>
           </div>
@@ -78,20 +82,11 @@ export function FooterSection() {
                 />
               </Link>
             ))}
-            <div className="flex items-center gap-2.5 pt-4">
-              <span className="h-2 w-2 rounded-full" style={{ backgroundColor: BRAND_ACCENT_HEX }} aria-hidden />
-              <a
-                href="/#top"
-                className="text-sm font-mono text-muted-foreground transition-colors hover:text-foreground sm:text-base"
-              >
-                Back to top
-              </a>
-            </div>
           </nav>
 
           <div className="flex w-full flex-col items-start justify-start gap-3 lg:col-span-3 lg:items-end lg:pt-2">
             <div className="inline-flex max-w-full items-baseline gap-2.5 rounded-2xl border border-foreground/10 bg-card px-4 py-3 text-foreground/90 sm:px-5 sm:py-3.5">
-              <span className="font-redob text-base uppercase leading-none tracking-[-0.02em] sm:text-lg">Karakoram</span>
+              <span className="font-redob text-base uppercase leading-none tracking-[-0.02em] sm:text-lg">NBL</span>
               <span className="text-muted-foreground/50">|</span>
               <span className="text-sm font-mono uppercase tracking-[0.12em] text-muted-foreground sm:text-base">
                 curated travel
@@ -152,13 +147,6 @@ export function FooterSection() {
             </a>
             .
           </p>
-          <a
-            href="/#top"
-            className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"
-          >
-            Top
-            <ArrowUp className="h-3.5 w-3.5" strokeWidth={1.5} />
-          </a>
         </div>
       </div>
     </footer>

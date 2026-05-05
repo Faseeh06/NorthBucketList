@@ -140,7 +140,18 @@ export function FooterSection() {
         </div>
 
         <div className="mt-0 flex w-full flex-col gap-1.5 py-2 font-mono text-[11px] text-muted-foreground sm:flex-row sm:items-center sm:justify-between sm:gap-3 sm:py-2.5 sm:text-xs">
-          <p className="max-w-4xl">Copyright © NorthBucket List {new Date().getFullYear()}. All rights reserved.</p>
+          <p className="max-w-4xl">
+            Copyright © NorthBucket List {new Date().getFullYear()}. All rights reserved. Made by{" "}
+            <a
+              href="https://github.com/faseeh06"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline decoration-foreground/30 underline-offset-2 transition-colors hover:text-foreground"
+            >
+              Faseeh
+            </a>
+            .
+          </p>
           <a
             href="/#top"
             className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground"

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Compass, Sparkles } from "lucide-react";
+import { ArrowRight, Compass } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getTripsByKind, type TripEntry } from "@/lib/content/trips-catalog";
 
@@ -72,8 +72,7 @@ function TripCard({ t }: { t: TripEntry }) {
 export function TripsPackagesSection() {
   const packages = getTripsByKind("package");
   const primary = packages[0];
-  const headline =
-    packages.length === 1 && primary ? `${primary.title} · ${primary.yearLabel}` : "Open departures";
+  const headline = packages.length === 1 && primary ? `${primary.title}` : "Open departures";
   const deck =
     packages.length === 1 && primary
       ? primary.tagline
@@ -116,16 +115,6 @@ export function TripsPackagesSection() {
           ))}
         </ul>
 
-        <p className="mx-auto mt-12 flex max-w-2xl flex-wrap items-start gap-3 border-t border-foreground/10 pt-10 text-sm leading-relaxed text-muted-foreground md:mt-14">
-          <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-[#F97316]" strokeWidth={1.5} />
-          <span>
-            Need a different window or pace?{" "}
-            <a href="#build" className="font-medium text-foreground underline decoration-foreground/25 underline-offset-4">
-              Use the custom trip builder
-            </a>{" "}
-            or email us—we&apos;ll sketch options.
-          </span>
-        </p>
       </div>
     </section>
   );

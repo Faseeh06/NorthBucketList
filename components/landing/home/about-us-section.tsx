@@ -102,7 +102,7 @@ function ParticleVisualization() {
   );
 }
 
-const { sectionId, label, title, paragraphs, onEveryTrip, card, pillars, instaGallery } = aboutUsContent;
+const { sectionId, label, title, paragraphs, instaGallery } = aboutUsContent;
 
 export function AboutUsSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -185,32 +185,6 @@ export function AboutUsSection() {
               />
             </div>
           ))}
-        </div>
-
-        <div
-          className={`relative mt-10 min-h-[min(100%,480px)] overflow-hidden border border-border bg-card transition-all duration-700 sm:mt-12 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"
-          }`}
-        >
-          <div className="relative p-6 sm:p-8 lg:p-10">
-            <ParticleVisualization />
-            <div className="relative z-10">
-              <p className="font-mono text-sm text-muted-foreground sm:text-base">{card.kicker}</p>
-              <p className="mt-4 max-w-3xl font-sans text-xl leading-[1.35] tracking-[-0.03em] text-foreground sm:text-2xl md:text-3xl">
-                {onEveryTrip}
-              </p>
-              <ul className="mt-8 flex flex-wrap gap-2" aria-label="Outcomes on every trip">
-                {pillars.map((w) => (
-                  <li
-                    key={w}
-                    className="rounded-full border border-foreground/10 bg-background/60 px-3.5 py-1.5 text-xs font-mono tracking-[0.12em] text-foreground/90 backdrop-blur-sm sm:px-4 sm:py-2 sm:text-sm"
-                  >
-                    {w}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
         </div>
       </div>
     </section>

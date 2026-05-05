@@ -139,10 +139,9 @@ export function DiscoverPromoBanner({ slides = PROMO_SLIDES, intervalMs = SLIDES
             </button>
           )}
 
-          <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-6 lg:min-h-[min(100%,420px)] lg:grid-cols-2 lg:items-center lg:gap-10 xl:gap-14">
-            {/* On desktop, image is aligned into the center gutter (not hugging the card’s left padding) */}
-            <div className="order-1 flex min-h-0 min-w-0 w-full justify-center lg:justify-end">
-              <div className="relative z-0 h-[260px] w-full max-w-md overflow-hidden rounded-2xl bg-muted/30 sm:h-[300px] md:h-[340px] lg:h-[360px] lg:max-w-[min(100%,22rem)] xl:max-w-sm">
+          <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-6 lg:min-h-[min(100%,420px)] lg:grid-cols-2 lg:items-center lg:gap-8 xl:gap-10">
+            <div className="order-1 flex min-h-0 min-w-0 w-full justify-center lg:justify-start">
+              <div className="relative z-0 h-[260px] w-full max-w-md overflow-hidden rounded-2xl bg-muted/30 sm:h-[320px] md:h-[360px] lg:h-[400px] lg:max-w-none">
                 {slides.map((s, i) => (
                   <div
                     key={s.src}

@@ -84,8 +84,8 @@ export function DiscoverWhereHero() {
     <section className="w-full bg-background font-sans">
       <div className="w-full pb-16 pt-0 sm:pb-20 md:pb-24">
         <div className="w-full">
-          <div className="relative overflow-hidden" style={{ clipPath: "ellipse(120% 100% at 50% 0%)" }}>
-            <div className="relative h-[72vh] min-h-[420px] max-h-[860px]">
+          <div className="relative overflow-hidden rounded-b-[2.75rem] md:rounded-b-none md:[clip-path:ellipse(120%_100%_at_50%_0%)]">
+            <div className="relative h-[58vh] min-h-[320px] max-h-[860px] sm:h-[72vh] sm:min-h-[420px]">
               <Image
                 src="/images/passu.jpg"
                 alt="Passu landscape"
@@ -96,10 +96,10 @@ export function DiscoverWhereHero() {
               />
               <div className="absolute inset-0 bg-black/35" aria-hidden />
               <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
-                <h1 className="font-redob text-[clamp(2rem,5.5vw,4.5rem)] uppercase leading-[0.9] tracking-[-0.03em]">
+                <h1 className="font-redob text-[clamp(1.85rem,8vw,4.5rem)] uppercase leading-[0.9] tracking-[-0.03em] sm:text-[clamp(2rem,5.5vw,4.5rem)]">
                   Where in the north
                 </h1>
-                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/90 sm:text-base md:text-lg">
+                <p className="mt-3 max-w-md text-sm leading-relaxed text-white/90 sm:max-w-2xl sm:text-base md:text-lg">
                   Ask by plan type, dates, and budget to get a practical route suggestion.
                 </p>
               </div>
@@ -107,11 +107,11 @@ export function DiscoverWhereHero() {
           </div>
 
           <form
-            className="relative z-20 mx-auto -mt-9 w-[min(100%-2rem,1120px)] rounded-full border border-foreground/10 bg-card p-2 shadow-[0_14px_38px_-18px_rgba(0,0,0,0.35)] sm:-mt-11 sm:w-[min(100%-2.5rem,1120px)] sm:p-2.5"
+            className="relative z-20 mx-auto mt-4 w-[calc(100%-1.25rem)] rounded-3xl border border-foreground/10 bg-card p-3 shadow-[0_14px_38px_-18px_rgba(0,0,0,0.25)] sm:-mt-11 sm:w-[min(100%-2.5rem,1120px)] sm:rounded-full sm:p-2.5"
             onSubmit={handleAsk}
           >
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr_auto]">
-              <label className="flex min-h-12 items-center gap-2 rounded-full px-4">
+            <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 sm:gap-2 lg:grid-cols-[1.35fr_1fr_1fr_auto]">
+              <label className="flex min-h-11 items-center gap-2 border-b border-foreground/20 px-1.5 sm:min-h-12 sm:rounded-full sm:border-0 sm:bg-transparent sm:px-4">
                 <Search className="h-4 w-4 shrink-0 text-muted-foreground" strokeWidth={1.75} />
                 <input
                   type="text"
@@ -121,7 +121,7 @@ export function DiscoverWhereHero() {
                   className="w-full border-0 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none sm:text-base"
                 />
               </label>
-              <label className="flex min-h-12 items-center rounded-full px-4">
+              <label className="flex min-h-11 items-center border-b border-foreground/20 px-1.5 sm:min-h-12 sm:rounded-full sm:border-0 sm:bg-transparent sm:px-4">
                 <input
                   type="text"
                   value={dates}
@@ -130,7 +130,7 @@ export function DiscoverWhereHero() {
                   className="w-full border-0 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none sm:text-base"
                 />
               </label>
-              <label className="flex min-h-12 items-center rounded-full px-4">
+              <label className="flex min-h-11 items-center border-b border-foreground/20 px-1.5 sm:min-h-12 sm:rounded-full sm:border-0 sm:bg-transparent sm:px-4">
                 <input
                   type="text"
                   value={budget}
@@ -142,7 +142,7 @@ export function DiscoverWhereHero() {
               <button
                 type="submit"
                 disabled={loading}
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-red-600 px-6 text-sm font-semibold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-70 sm:text-base"
+                className="mt-1 inline-flex min-h-11 items-center justify-center rounded-full bg-red-600 px-6 text-sm font-semibold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-70 sm:mt-0 sm:min-h-12 sm:text-base"
               >
                 {loading ? "Asking..." : "Ask AI"}
               </button>
@@ -152,7 +152,7 @@ export function DiscoverWhereHero() {
         </div>
       </div>
       {chatOpen && !chatMinimized && (
-        <div className="fixed bottom-4 right-4 z-50 w-[min(92vw,420px)] overflow-hidden rounded-2xl border border-foreground/10 bg-card shadow-2xl">
+        <div className="fixed inset-x-0 bottom-0 z-50 w-full overflow-hidden rounded-t-2xl border border-foreground/10 bg-card shadow-2xl sm:inset-x-auto sm:bottom-4 sm:right-4 sm:w-[min(92vw,420px)] sm:rounded-2xl">
           <div className="flex items-center justify-between border-b border-foreground/10 px-4 py-3">
             <p className="text-sm font-semibold text-foreground">NBL AI Planner</p>
             <div className="flex items-center gap-1">
@@ -192,7 +192,7 @@ export function DiscoverWhereHero() {
                   <div
                     key={`${m.role}-${i}`}
                     className={cn(
-                      "max-w-[92%] rounded-2xl px-3 py-2 text-sm leading-relaxed",
+                      "max-w-[92%] whitespace-pre-wrap rounded-2xl px-3 py-2 text-sm leading-relaxed",
                       m.role === "user"
                         ? "ml-auto bg-foreground text-background"
                         : "mr-auto border border-foreground/10 bg-card text-foreground",

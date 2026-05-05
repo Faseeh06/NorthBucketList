@@ -8,6 +8,13 @@ type DiscoverAiBody = {
 };
 
 const DEFAULT_MODEL = "llama-3.3-70b-versatile";
+const GENERIC_GREETINGS = new Set(["hi", "hello", "helo", "heelo", "hey", "salam", "assalamualaikum"]);
+
+function extractPrimaryAsk(rawQuery: string) {
+  const match = rawQuery.match(/What to ask:\s*([^|]+)/i);
+  const extracted = match?.[1]?.trim() ?? rawQuery.trim();
+  return extracted.replace(/\s+/g, " ");
+}
 
 export async function POST(request: Request) {
   const apiKey = process.env.GROQ_API_KEY;
@@ -28,6 +35,27 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Please enter a route query." }, { status: 400 });
   }
 
+  const primaryAsk = extractPrimaryAsk(query).toLowerCase();
+  if (primaryAsk.length < 8 || GENERIC_GREETINGS.has(primaryAsk)) {
+    return NextResponse.json({
+      answer: `Please share a few trip details first so I can give a proper plan:
+
+1) From where to where? (example: Islamabad to Skardu)
+2) Total days and month/dates
+3) Budget per person (PKR)
+4) Transport preference (bike, public, private car/jeep)
+5) Group size
+
+After that, I will return:
+- feasibility
+- day-by-day plan
+- budget per person
+- food and stay ranges
+- transport options (public/private/bike)
+- safety notes`,
+    });
+  }
+
   const prompt = `You are a senior Northern Pakistan trip planner for NorthBucket List.
 Latest user request: "${query}"
 
@@ -40,6 +68,7 @@ Rules:
 - Mention food options and typical per-day meal cost range.
 - Mention transport ways: public transport, private car/jeep, and bike (if relevant).
 - If user asks a very short timeline, provide a feasible alternative plan.
+- Use clean multi-line formatting. Put each heading on a new line and use bullet points under each heading.
 
 Output format (exact headings):
 Feasibility:

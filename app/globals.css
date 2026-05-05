@@ -5,19 +5,19 @@
 
 :root {
   /* Global page: warm paper (matches intro / editorial blocks) */
-  --background: #f7f7f2;
+  --background: #f2f2eb;
   --foreground: #1a1a1a;
-  --card: #fafaf7;
+  --card: #f2f2eb;
   --card-foreground: #1a1a1a;
-  --popover: #fafaf7;
+  --popover: #f2f2eb;
   --popover-foreground: #1a1a1a;
   --primary: oklch(0.42 0.1 200);
   --primary-foreground: #fafaf7;
-  --secondary: #e8e8e0;
+  --secondary: #f2f2eb;
   --secondary-foreground: #1a1a1a;
-  --muted: #ebebe4;
+  --muted: #f2f2eb;
   --muted-foreground: oklch(0.45 0.02 95);
-  --accent: #f0f0ea;
+  --accent: #f2f2eb;
   --accent-foreground: #1a1a1a;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.99 0.005 95);
@@ -32,7 +32,7 @@
   --radius: 0.25rem;
   --brand: oklch(0.45 0.12 195);
   --brand-muted: oklch(0.45 0.12 195 / 0.15);
-  --sidebar: #f7f7f2;
+  --sidebar: #f2f2eb;
   --sidebar-foreground: #1a1a1a;
   --sidebar-primary: oklch(0.42 0.1 200);
   --sidebar-primary-foreground: #fafaf7;
@@ -43,8 +43,8 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-instrument), 'Instrument Sans', system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), 'JetBrains Mono', monospace;
+  --font-sans: var(--font-geist-sans), 'Instrument Sans', system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), 'JetBrains Mono', monospace;
   --font-display: var(--font-sans);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -88,6 +88,10 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+  }
+  section {
+    border-top-width: 0 !important;
+    border-bottom-width: 0 !important;
   }
   html {
     /* Instant scroll on route changes; global smooth scroll made navigations (e.g. /trips → /trips/minimarg) visibly animate to top. */

@@ -1,7 +1,8 @@
 import React from "react"
 import type { Metadata } from 'next'
 import localFont from "next/font/local"
-import { Instrument_Sans, JetBrains_Mono } from 'next/font/google'
+import { GeistSans } from "geist/font/sans"
+import { GeistMono } from "geist/font/mono"
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
@@ -10,16 +11,6 @@ const redob = localFont({
   variable: "--font-redob",
   display: "swap",
 })
-
-const instrumentSans = Instrument_Sans({ 
-  subsets: ["latin"],
-  variable: '--font-instrument'
-});
-
-const jetbrainsMono = JetBrains_Mono({ 
-  subsets: ["latin"],
-  variable: '--font-jetbrains'
-});
 
 export const metadata: Metadata = {
   title: {
@@ -36,7 +27,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const fontVariables = [instrumentSans.variable, jetbrainsMono.variable, redob.variable].join(" ")
+  const fontVariables = [GeistSans.variable, GeistMono.variable, redob.variable].join(" ")
 
   return (
     <html lang="en" className={fontVariables}>

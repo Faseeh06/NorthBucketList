@@ -3,8 +3,13 @@
 import { useState, useEffect, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, Pause, Play } from "lucide-react";
+import { Search, Pause, Play, X, Minus, MessageCircle, ChevronDown, ChevronUp, Send } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+type ChatMessage = {
+  role: "user" | "assistant";
+  content: string;
+};
 
 /**
  * Discover top — large hero, four filter chips, AI-style rounded search.
@@ -13,41 +18,66 @@ export function DiscoverWhereHero() {
   const [q, setQ] = useState("");
   const [dates, setDates] = useState("");
   const [budget, setBudget] = useState("");
-  const [answer, setAnswer] = useState("");
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [replyInput, setReplyInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatMinimized, setChatMinimized] = useState(false);
+  const [chatCollapsed, setChatCollapsed] = useState(false);
 
-  async function handleAsk(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (!q.trim()) return;
-
+  async function requestPlan(userText: string) {
     setLoading(true);
-    setError("");
-    setAnswer("");
     try {
-      const composedQuery = [
-        `What to ask: ${q}`,
-        dates ? `Dates: ${dates}` : "",
-        budget ? `Budget: ${budget}` : "",
-      ]
-        .filter(Boolean)
-        .join(" | ");
-
       const res = await fetch("/api/ai/discover", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: composedQuery }),
+        body: JSON.stringify({
+          query: userText,
+          history: messages,
+        }),
       });
       const data = (await res.json()) as { answer?: string; error?: string };
       if (!res.ok || !data.answer) {
         throw new Error(data.error || "Could not generate a route suggestion.");
       }
-      setAnswer(data.answer);
+      setMessages((prev) => [...prev, { role: "assistant", content: data.answer as string }]);
+      setChatOpen(true);
+      setChatMinimized(false);
+      setChatCollapsed(false);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not generate a route suggestion.");
+      const msg = err instanceof Error ? err.message : "Could not generate a route suggestion.";
+      setMessages((prev) => [...prev, { role: "assistant", content: `Error: ${msg}` }]);
+      setChatOpen(true);
+      setChatMinimized(false);
+      setChatCollapsed(false);
     } finally {
       setLoading(false);
     }
+  }
+
+  async function handleAsk(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!q.trim()) return;
+
+    const composedQuery = [
+      `What to ask: ${q}`,
+      dates ? `Dates: ${dates}` : "",
+      budget ? `Budget: ${budget}` : "",
+    ]
+      .filter(Boolean)
+      .join(" | ");
+
+    setMessages((prev) => [...prev, { role: "user", content: composedQuery }]);
+    await requestPlan(composedQuery);
+  }
+
+  async function handleReplySubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!replyInput.trim() || loading) return;
+    const followup = replyInput.trim();
+    setReplyInput("");
+    setMessages((prev) => [...prev, { role: "user", content: followup }]);
+    await requestPlan(followup);
   }
 
   return (
@@ -119,14 +149,93 @@ export function DiscoverWhereHero() {
             </div>
           </form>
 
-          {(answer || error) && (
-            <div className="mx-auto mt-6 max-w-5xl rounded-2xl border border-foreground/10 bg-card p-4 text-left sm:p-5">
-              {answer && <p className="text-sm leading-relaxed text-foreground sm:text-base">{answer}</p>}
-              {error && <p className="text-sm leading-relaxed text-destructive sm:text-base">{error}</p>}
-            </div>
-          )}
         </div>
       </div>
+      {chatOpen && !chatMinimized && (
+        <div className="fixed bottom-4 right-4 z-50 w-[min(92vw,420px)] overflow-hidden rounded-2xl border border-foreground/10 bg-card shadow-2xl">
+          <div className="flex items-center justify-between border-b border-foreground/10 px-4 py-3">
+            <p className="text-sm font-semibold text-foreground">NBL AI Planner</p>
+            <div className="flex items-center gap-1">
+              <button
+                type="button"
+                onClick={() => setChatCollapsed((v) => !v)}
+                className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                aria-label={chatCollapsed ? "Expand planner chat" : "Collapse planner chat"}
+              >
+                {chatCollapsed ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+              </button>
+              <button
+                type="button"
+                onClick={() => setChatMinimized(true)}
+                className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                aria-label="Minimize planner chat"
+              >
+                <Minus className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => setChatOpen(false)}
+                className="inline-flex h-8 w-8 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                aria-label="Close planner chat"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+          {!chatCollapsed && (
+            <>
+              <div className="max-h-[52vh] space-y-3 overflow-y-auto bg-muted/20 p-4">
+                {messages.length === 0 && (
+                  <p className="text-sm text-muted-foreground">Ask your first trip question to start planning.</p>
+                )}
+                {messages.map((m, i) => (
+                  <div
+                    key={`${m.role}-${i}`}
+                    className={cn(
+                      "max-w-[92%] rounded-2xl px-3 py-2 text-sm leading-relaxed",
+                      m.role === "user"
+                        ? "ml-auto bg-foreground text-background"
+                        : "mr-auto border border-foreground/10 bg-card text-foreground",
+                    )}
+                  >
+                    {m.content}
+                  </div>
+                ))}
+                {loading && <p className="text-sm text-muted-foreground">Thinking...</p>}
+              </div>
+              <form onSubmit={handleReplySubmit} className="border-t border-foreground/10 p-3">
+                <div className="flex items-center gap-2">
+                  <input
+                    type="text"
+                    value={replyInput}
+                    onChange={(e) => setReplyInput(e.target.value)}
+                    placeholder="Reply to AI..."
+                    className="h-10 w-full rounded-full border border-foreground/15 bg-background px-3 text-sm text-foreground outline-none focus:border-foreground/30"
+                  />
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-red-600 text-white transition hover:bg-red-700 disabled:opacity-70"
+                    aria-label="Send follow-up message"
+                  >
+                    <Send className="h-4 w-4" />
+                  </button>
+                </div>
+              </form>
+            </>
+          )}
+        </div>
+      )}
+      {chatOpen && chatMinimized && (
+        <button
+          type="button"
+          onClick={() => setChatMinimized(false)}
+          className="fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full border border-foreground/10 bg-card px-4 py-2 text-sm font-medium text-foreground shadow-lg transition-colors hover:bg-muted"
+        >
+          <MessageCircle className="h-4 w-4" />
+          Open AI chat
+        </button>
+      )}
     </section>
   );
 }

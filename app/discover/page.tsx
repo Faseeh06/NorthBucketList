@@ -3,7 +3,6 @@ import { SiteLayout } from "@/components/landing/shell/site-layout";
 import { DiscoverWhereHero, DiscoverPromoBanner } from "@/components/landing/discover/where-hero";
 import {
   DiscoverByInterest,
-  DiscoverExperiencesRow,
   DiscoverArticleTeaser,
 } from "@/components/landing/discover/discover-pre-boxes";
 import { DiscoverCategoryCards } from "@/components/landing/discover/category-cards";
@@ -20,7 +19,6 @@ export default function DiscoverPage() {
       <DiscoverWhereHero />
       <DiscoverPromoBanner />
       <DiscoverByInterest />
-      <DiscoverExperiencesRow />
       <DiscoverArticleTeaser />
       <DiscoverCategoryCards />
     </SiteLayout>

@@ -1,90 +1,130 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Search, Mountain, Car, Compass, Sparkles, Pause, Play } from "lucide-react";
+import { Search, Pause, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const filters = [
-  { id: "all", label: "All", icon: Search },
-  { id: "valleys", label: "Valleys", icon: Mountain },
-  { id: "road", label: "Road trips", icon: Car },
-  { id: "treks", label: "Treks", icon: Compass },
-] as const;
 
 /**
  * Discover top — large hero, four filter chips, AI-style rounded search.
  */
 export function DiscoverWhereHero() {
   const [q, setQ] = useState("");
-  const [active, setActive] = useState("all");
+  const [dates, setDates] = useState("");
+  const [budget, setBudget] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  async function handleAsk(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!q.trim()) return;
+
+    setLoading(true);
+    setError("");
+    setAnswer("");
+    try {
+      const composedQuery = [
+        `What to ask: ${q}`,
+        dates ? `Dates: ${dates}` : "",
+        budget ? `Budget: ${budget}` : "",
+      ]
+        .filter(Boolean)
+        .join(" | ");
+
+      const res = await fetch("/api/ai/discover", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: composedQuery }),
+      });
+      const data = (await res.json()) as { answer?: string; error?: string };
+      if (!res.ok || !data.answer) {
+        throw new Error(data.error || "Could not generate a route suggestion.");
+      }
+      setAnswer(data.answer);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Could not generate a route suggestion.");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
-    <section className="bg-background pt-32 pb-20 md:pt-44 md:pb-28">
-      <div className="mx-auto w-full max-w-[min(100%,1760px)] px-4 text-center sm:px-5 lg:px-8">
-        <div className="mx-auto max-w-4xl">
-          <h1 className="mb-4 font-redob text-[clamp(2.25rem,6vw,4.25rem)] leading-[0.95] tracking-[-0.03em] text-foreground">
-            Where in the north?
-          </h1>
-          <p className="mx-auto mb-10 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground sm:mb-12 sm:text-lg md:text-xl">
-            Search valleys, base towns, or a trip style—we&apos;ll match routes, stays, and season windows.
-          </p>
-
-          <div className="mx-auto mb-10 grid w-full max-w-3xl grid-cols-2 gap-2.5 sm:mb-12 sm:grid-cols-4 sm:gap-3">
-            {filters.map((f) => {
-              const Icon = f.icon;
-              const on = active === f.id;
-              return (
-                <button
-                  key={f.id}
-                  type="button"
-                  onClick={() => setActive(f.id)}
-                  className={`inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border-2 px-2 py-2.5 text-sm font-medium transition-all sm:min-h-14 sm:px-4 sm:py-3.5 sm:text-base ${
-                    on
-                      ? "border-foreground bg-foreground text-background shadow-md"
-                      : "border-border/80 bg-card text-foreground/90 shadow-sm hover:border-foreground/25 hover:shadow"
-                  }`}
-                >
-                  <Icon className="h-4 w-4 shrink-0 sm:h-5 sm:w-5" strokeWidth={1.75} />
-                  {f.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="mx-auto w-full max-w-4xl">
-          <p className="mb-2 flex items-center justify-center gap-1.5 text-xs font-mono text-muted-foreground sm:text-sm">
-            <Sparkles className="h-3.5 w-3.5 text-primary" strokeWidth={1.75} />
-            <span>AI-assisted route matching</span>
-          </p>
-          <form
-            className="group relative mx-auto w-full"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <div
-              className="flex min-h-14 w-full items-center overflow-hidden rounded-full border-2 border-foreground/10 bg-gradient-to-b from-card to-muted/30 px-1 py-1 pl-2 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.1)] transition-all focus-within:border-primary/40 focus-within:ring-2 focus-within:ring-primary/15 sm:min-h-16 sm:pl-3"
-            >
-              <div className="mr-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary/10 sm:h-10 sm:w-10">
-                <Search className="h-4 w-4 text-primary sm:h-5 sm:w-5" strokeWidth={1.75} />
-              </div>
-              <input
-                type="search"
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-                placeholder="Try: “Hunza in cherry blossom” or “quiet Skardu week, family of four”…"
-                className="min-w-0 flex-1 border-0 bg-transparent py-3 pr-2 text-left text-sm text-foreground placeholder:text-muted-foreground/80 outline-none sm:py-3.5 sm:pr-3 sm:text-base"
+    <section className="w-full bg-background font-sans">
+      <div className="w-full pb-16 pt-0 sm:pb-20 md:pb-24">
+        <div className="w-full">
+          <div className="relative overflow-hidden" style={{ clipPath: "ellipse(120% 100% at 50% 0%)" }}>
+            <div className="relative h-[72vh] min-h-[420px] max-h-[860px]">
+              <Image
+                src="/images/passu.jpg"
+                alt="Passu landscape"
+                fill
+                priority
+                className="object-cover object-center"
+                sizes="(min-width: 1024px) 80vw, 100vw"
               />
-              <Link
-                href="/trips"
-                className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-full bg-foreground px-4 py-2.5 text-sm font-semibold text-background transition hover:bg-foreground/90 sm:px-6 sm:py-3 sm:text-base"
+              <div className="absolute inset-0 bg-black/35" aria-hidden />
+              <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
+                <h1 className="font-redob text-[clamp(2rem,5.5vw,4.5rem)] uppercase leading-[0.9] tracking-[-0.03em]">
+                  Where in the north
+                </h1>
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/90 sm:text-base md:text-lg">
+                  Ask by plan type, dates, and budget to get a practical route suggestion.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <form
+            className="relative z-20 mx-auto -mt-9 w-[min(100%-2rem,1120px)] rounded-full border border-foreground/10 bg-card p-2 shadow-[0_14px_38px_-18px_rgba(0,0,0,0.35)] sm:-mt-11 sm:w-[min(100%-2.5rem,1120px)] sm:p-2.5"
+            onSubmit={handleAsk}
+          >
+            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-[1.35fr_1fr_1fr_auto]">
+              <label className="flex min-h-12 items-center gap-2 rounded-full px-4">
+                <Search className="h-4 w-4 shrink-0 text-muted-foreground" strokeWidth={1.75} />
+                <input
+                  type="text"
+                  value={q}
+                  onChange={(e) => setQ(e.target.value)}
+                  placeholder="What to ask"
+                  className="w-full border-0 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none sm:text-base"
+                />
+              </label>
+              <label className="flex min-h-12 items-center rounded-full px-4">
+                <input
+                  type="text"
+                  value={dates}
+                  onChange={(e) => setDates(e.target.value)}
+                  placeholder="Dates calendar"
+                  className="w-full border-0 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none sm:text-base"
+                />
+              </label>
+              <label className="flex min-h-12 items-center rounded-full px-4">
+                <input
+                  type="text"
+                  value={budget}
+                  onChange={(e) => setBudget(e.target.value)}
+                  placeholder="Budget"
+                  className="w-full border-0 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none sm:text-base"
+                />
+              </label>
+              <button
+                type="submit"
+                disabled={loading}
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-red-600 px-6 text-sm font-semibold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-70 sm:text-base"
               >
-                <Sparkles className="h-3.5 w-3.5 opacity-80 sm:h-4 sm:w-4" />
-                <span>Ask</span>
-              </Link>
+                {loading ? "Asking..." : "Ask AI"}
+              </button>
             </div>
           </form>
+
+          {(answer || error) && (
+            <div className="mx-auto mt-6 max-w-5xl rounded-2xl border border-foreground/10 bg-card p-4 text-left sm:p-5">
+              {answer && <p className="text-sm leading-relaxed text-foreground sm:text-base">{answer}</p>}
+              {error && <p className="text-sm leading-relaxed text-destructive sm:text-base">{error}</p>}
+            </div>
+          )}
         </div>
       </div>
     </section>

@@ -72,58 +72,37 @@ export function PageHero({ eyebrow, titleLines, description, image, cta, variant
     );
   }
 
-  return (
-    <section className="relative min-h-[min(100vh,640px)] md:min-h-[min(100vh,720px)] flex flex-col justify-end overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <Image
-          src={image.src}
-          alt={image.alt}
-          fill
-          priority
-          className="object-cover object-center"
-          sizes="100vw"
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30"
-          aria-hidden
-        />
-        <div
-          className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/25 to-transparent"
-          aria-hidden
-        />
-        <div
-          className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-black/45 to-transparent"
-          aria-hidden
-        />
-      </div>
+  const fullTitle = titleLines.join(" ");
 
-      <div className="relative z-10 w-full max-w-[min(100%,1760px)] mx-auto px-4 sm:px-5 lg:px-8 pb-10 sm:pb-12 md:pb-16 pt-32 md:pt-36">
-        <p className="mb-4 text-[10px] font-mono uppercase tracking-[0.18em] text-white/70 sm:text-xs">
-          {eyebrow}
-        </p>
-        <h1
-          className="font-redob uppercase tracking-[-0.02em] leading-[0.9] text-white max-w-[20ch] [text-shadow:0_2px_40px_rgba(0,0,0,0.4)]"
-          style={{ fontSize: "clamp(2.25rem, 7vw, 4.25rem)" }}
-        >
-          {titleLines.map((line, i) => (
-            <span key={`${i}-${line}`} className="block">
-              {line}
-            </span>
-          ))}
-        </h1>
-        <p className="mt-5 sm:mt-6 max-w-xl text-base sm:text-lg text-white/90 leading-relaxed font-sans">
-          {description}
-        </p>
-        {cta && (
-          <div className="mt-8 sm:mt-10">
-            <Button
-              className="rounded-full h-12 px-8 bg-white text-black hover:bg-white/90 font-mono text-xs shadow-lg shadow-black/20"
-              asChild
+  return (
+    <section className="w-full bg-background font-sans">
+      <div className="mx-auto flex w-full max-w-[min(100%,1760px)] px-4 pb-16 pt-28 sm:px-5 sm:pb-20 sm:pt-32 md:pb-24 md:pt-36 lg:px-8">
+        <div className="flex w-full flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+          <div>
+            <p className="mb-4 text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground sm:mb-5 sm:text-xs">
+              {eyebrow}
+            </p>
+            <h1
+              className="font-redob uppercase leading-[0.9] tracking-[-0.03em] text-foreground"
+              style={{ fontSize: "clamp(3.2rem,9vw,7.2rem)" }}
             >
-              <Link href={cta.href}>{cta.label}</Link>
-            </Button>
+              {fullTitle}
+            </h1>
           </div>
-        )}
+          <div className="flex max-w-md flex-col gap-5 sm:flex-row sm:items-end lg:max-w-lg lg:flex-col lg:items-end">
+            <p className="text-left font-sans text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl lg:text-right">
+              {description}
+            </p>
+            {cta && (
+              <Button
+                className="h-11 self-start rounded-full bg-foreground px-6 font-mono text-xs text-background hover:bg-foreground/90 sm:self-end"
+                asChild
+              >
+                <Link href={cta.href}>{cta.label}</Link>
+              </Button>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );

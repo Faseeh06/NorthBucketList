@@ -10,14 +10,25 @@ export const metadata: Metadata = {
 export default function GalleryPage() {
   return (
     <SiteLayout>
-      <section className="bg-background pt-32 pb-10 md:pt-44 md:pb-14">
-        <div className="mx-auto w-full max-w-[min(100%,1760px)] px-4 text-center sm:px-5 lg:px-8">
-          <h1 className="font-redob text-[clamp(2.25rem,6vw,4.25rem)] leading-[0.95] tracking-[-0.03em] text-foreground">
-            Gallery
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground sm:mt-5 sm:text-lg md:text-xl">
-            A living scrapbook from the road—same set as on Trips for now, updated from our Instagram highlights.
-          </p>
+      <section className="w-full bg-background font-sans">
+        <div className="mx-auto flex w-full max-w-[min(100%,1760px)] px-4 pb-16 pt-28 sm:px-5 sm:pb-20 sm:pt-32 md:pb-24 md:pt-36 lg:px-8">
+          <div className="flex w-full flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+            <div>
+              <p className="mb-4 text-[10px] font-mono uppercase tracking-[0.18em] text-muted-foreground sm:mb-5 sm:text-xs">
+                NorthBucket List
+              </p>
+              <h1
+                className="font-redob uppercase leading-[0.9] tracking-[-0.03em] text-foreground"
+                style={{ fontSize: "clamp(3.2rem,9vw,7.2rem)" }}
+              >
+                Gallery
+              </h1>
+            </div>
+            <p className="max-w-lg text-left font-sans text-base leading-relaxed text-muted-foreground sm:text-lg md:text-xl lg:text-right">
+              A living scrapbook from the road - same set as on Trips for now, updated from our
+              Instagram highlights.
+            </p>
+          </div>
         </div>
       </section>
       <InstaGallerySection

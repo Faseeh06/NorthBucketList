@@ -64,7 +64,10 @@ export function HeroSection() {
             <span className="block">Bucket</span>
             <span className="block whitespace-nowrap">
               List
-              <span className="text-[0.45em] align-super text-[#F97316] ml-0.5 sm:ml-1.5 [text-shadow:0_0_20px_rgba(0,0,0,0.4)]" aria-hidden>
+              <span
+                className="ml-0.5 align-super text-[0.45em] font-sans font-black leading-none text-[#F97316] [text-shadow:0_0_20px_rgba(0,0,0,0.4)] sm:ml-1.5"
+                aria-hidden
+              >
                 *
               </span>
             </span>

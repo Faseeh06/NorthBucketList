@@ -17,6 +17,20 @@ type PageHeroProps = PageHeroBase & {
   variant?: "full" | "split";
 };
 
+const FALLBACK_CHAR_IN_DISPLAY_TEXT = /[0-9]|[^A-Za-z\s]/;
+
+function renderDisplayText(text: string) {
+  return text.split("").map((char, index) =>
+    FALLBACK_CHAR_IN_DISPLAY_TEXT.test(char) ? (
+      <span key={`${char}-${index}`} className="font-sans font-black">
+        {char}
+      </span>
+    ) : (
+      char
+    ),
+  );
+}
+
 /**
  * Subpage hero: full-bleed (TripAdvisor-style) or split image + copy (card layout).
  * Uses `font-redob` for titles (same as home / footer wordmark).
@@ -48,7 +62,7 @@ export function PageHero({ eyebrow, titleLines, description, image, cta, variant
               >
                 {titleLines.map((line, i) => (
                   <span key={`${i}-${line}`} className="block">
-                    {line}
+                    {renderDisplayText(line)}
                   </span>
                 ))}
               </h1>
@@ -86,7 +100,7 @@ export function PageHero({ eyebrow, titleLines, description, image, cta, variant
               className="font-redob uppercase leading-[0.9] tracking-[-0.03em] text-foreground"
               style={{ fontSize: "clamp(3.2rem,9vw,7.2rem)" }}
             >
-              {fullTitle}
+              {renderDisplayText(fullTitle)}
             </h1>
           </div>
           <div className="flex max-w-md flex-col gap-5 sm:flex-row sm:items-end lg:max-w-lg lg:flex-col lg:items-end">

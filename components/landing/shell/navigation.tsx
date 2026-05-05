@@ -15,19 +15,13 @@ const navLinks = [
   { name: "Contact", href: "/contact" },
 ];
 
-/** Routes whose first screen is a full-bleed dark hero — match home nav: transparent + tall bar until scroll. */
-function isHeroTransparentRoute(pathname: string) {
-  if (pathname === "/" || pathname === "/trips") return true;
-  return /^\/trips\/[^/]+$/.test(pathname);
-}
-
 export function Navigation() {
   const pathname = usePathname();
-  const heroTransparent = isHeroTransparentRoute(pathname);
+  const isHome = pathname === "/";
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const solidNav = isScrolled || !heroTransparent;
+  const solidNav = isScrolled || !isHome;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,7 +31,7 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /* Floating nav: full-bleed hero routes use transparent bar + light links until scroll (same motion as home). */
+  /* Same floating frame on every route (inset, max-width, height transition). Home hero uses transparent bar + light links until scroll. */
   return (
     <header className="pointer-events-none fixed inset-x-0 top-4 z-50 flex justify-center px-4 transition-all duration-500 sm:px-5">
       <nav
@@ -49,7 +43,7 @@ export function Navigation() {
       >
         <div
           className={`flex items-center justify-between transition-all duration-500 px-4 sm:px-5 lg:px-6 ${
-            solidNav ? "min-h-16 py-1.5" : heroTransparent ? "min-h-24 py-2" : "min-h-16 py-1.5"
+            solidNav ? "min-h-16 py-1.5" : isHome ? "min-h-24 py-2" : "min-h-16 py-1.5"
           }`}
         >
           <Link href="/" className="group flex shrink-0 items-center">

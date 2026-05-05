@@ -4,6 +4,20 @@ import { ArrowRight, Compass, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getTripsByKind, type TripEntry } from "@/lib/content/trips-catalog";
 
+const FALLBACK_CHAR_IN_DISPLAY_TEXT = /[0-9]|[^A-Za-z\s]/;
+
+function renderDisplayText(text: string) {
+  return text.split("").map((char, index) =>
+    FALLBACK_CHAR_IN_DISPLAY_TEXT.test(char) ? (
+      <span key={`${char}-${index}`} className="font-sans font-black">
+        {char}
+      </span>
+    ) : (
+      char
+    ),
+  );
+}
+
 function TripCard({ t }: { t: TripEntry }) {
   const kindLabel = t.kind === "package" ? "Package" : "Past run";
 
@@ -32,7 +46,9 @@ function TripCard({ t }: { t: TripEntry }) {
         </span>
       </div>
       <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <h3 className="font-redob text-xl leading-[1.06] tracking-[-0.02em] text-foreground sm:text-2xl">{t.title}</h3>
+        <h3 className="font-redob text-xl leading-[1.06] tracking-[-0.02em] text-foreground sm:text-2xl">
+          {renderDisplayText(t.title)}
+        </h3>
         <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground sm:text-[15px]">{t.tagline}</p>
         <div className="mt-5 flex flex-wrap gap-x-4 gap-y-1 border-t border-foreground/10 pt-4 font-mono text-[11px] uppercase tracking-[0.06em] text-muted-foreground sm:text-xs">
           <span>{t.duration}</span>
@@ -78,7 +94,7 @@ export function TripsPackagesSection() {
               Open departure
             </div>
             <h2 className="mt-4 font-redob text-[clamp(1.85rem,4.2vw,3.35rem)] uppercase leading-[0.96] tracking-[-0.02em] text-foreground">
-              {headline}
+              {renderDisplayText(headline)}
             </h2>
             <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">{deck}</p>
           </div>

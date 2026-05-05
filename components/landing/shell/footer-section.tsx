@@ -127,7 +127,7 @@ export function FooterSection() {
                 <span className="mt-0.5 block sm:mt-1">
                   List
                   <span
-                    className="ml-0.5 align-super text-[0.3em] sm:ml-1"
+                    className="ml-0.5 align-super text-[0.3em] font-sans font-black leading-none sm:ml-1"
                     style={{ color: BRAND_ACCENT_HEX }}
                     aria-hidden
                   >
